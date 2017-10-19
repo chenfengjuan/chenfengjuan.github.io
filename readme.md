@@ -1,0 +1,2 @@
+＊根目录是hexo的分支文件，也就是所有文章的源文件以及hexo的环境配置，需要推送到hexo分支上
+＊根目录下的chenfengjuan.github.io这个文件就是`hexo g`命令后生成的静态html文件等，也就是需要push到git上的master分支上的。

@@ -85,7 +85,7 @@ deploy:
 # NexT Theme configuration
 # =============================================================================
 
-avatar: https://avatars1.githubusercontent.com/u/32269?v=3&s=460
+avatar: /uploads/myIcon.jpeg
 
 # Duoshuo
 duoshuo_shortname: notes-iissnan
