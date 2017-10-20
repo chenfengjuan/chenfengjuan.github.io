@@ -99,21 +99,21 @@
 <meta name="description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《javaScript高级程序设计－第6章》之继承">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/index.html">
+<meta property="og:title" content="面向对象程序设计之继承">
+<meta property="og:url" content="http://yoursite.com/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html">
 <meta property="og:site_name" content="chenfengjuan">
 <meta property="og:description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img8.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img9.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img10.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img11.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img12.png">
-<meta property="og:updated_time" content="2017-10-20T07:38:04.000Z">
+<meta property="og:image" content="http://yoursite.com/uploads/img8.png">
+<meta property="og:image" content="http://yoursite.com/uploads/img9.png">
+<meta property="og:image" content="http://yoursite.com/uploads/img10.png">
+<meta property="og:image" content="http://yoursite.com/uploads/img11.png">
+<meta property="og:image" content="http://yoursite.com/uploads/img12.png">
+<meta property="og:updated_time" content="2017-10-20T10:32:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《javaScript高级程序设计－第6章》之继承">
+<meta name="twitter:title" content="面向对象程序设计之继承">
 <meta name="twitter:description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/20/uploads/img8.png">
+<meta name="twitter:image" content="http://yoursite.com/uploads/img8.png">
 
 
 
@@ -143,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/"/>
+  <link rel="canonical" href="http://yoursite.com/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html"/>
 
 
 
 
 
-  <title>读《javaScript高级程序设计－第6章》之继承 | chenfengjuan</title>
+  <title>面向对象程序设计之继承 | chenfengjuan</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenfengjuan">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">读《javaScript高级程序设计－第6章》之继承</h1>
+          <h1 class="post-title" itemprop="name headline">面向对象程序设计之继承</h1>
         
 
         <div class="post-meta">
@@ -326,6 +326,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript高级程序设计/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript高级程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -334,8 +356,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/20/读《javaScript高级程序设计－第6章》之继承/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/20/读《javaScript高级程序设计－第6章》之继承/" itemprop="commentCount"></span>
+                <a href="/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -346,6 +368,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,842
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -415,7 +456,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"># js</a>
+            <a href="/tags/js/" <i class="fa fa-tag"></i> js</a>
           
         </div>
       
@@ -428,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/" rel="next" title="读《javaScript高级程序设计－第6章》之封装类">
-                <i class="fa fa-chevron-left"></i> 读《javaScript高级程序设计－第6章》之封装类
+              <a href="/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之封装类.html" rel="next" title="面向对象程序设计之封装类">
+                <i class="fa fa-chevron-left"></i> 面向对象程序设计之封装类
               </a>
             
           </div>
@@ -466,8 +507,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/10/20/读《javaScript高级程序设计－第6章》之继承/"
-           data-title="读《javaScript高级程序设计－第6章》之继承" data-url="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/">
+      <div class="ds-thread" data-thread-key="javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html"
+           data-title="面向对象程序设计之继承" data-url="http://yoursite.com/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html">
       </div>
     
   </div>
@@ -525,6 +566,15 @@
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
