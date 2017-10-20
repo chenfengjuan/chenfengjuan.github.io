@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一、工厂模式所谓的工厂模式就是，把创建具体对象的过程抽象成了一个函数，每次调用这个函数都会返回一个相似的对象。1234567891011121314function createPerson(name, age, job)&amp;#123;var o = new Object();    o.name = name;    o.age = age;    o.job = job;    o.sayNam">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《javaScript高级程序设计－第6章》之封装类">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/index.html">
+<meta property="og:site_name" content="chenfengjuan">
+<meta property="og:description" content="一、工厂模式所谓的工厂模式就是，把创建具体对象的过程抽象成了一个函数，每次调用这个函数都会返回一个相似的对象。1234567891011121314function createPerson(name, age, job)&amp;#123;var o = new Object();    o.name = name;    o.age = age;    o.job = job;    o.sayNam">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/10/19/uploads/img7.png">
+<meta property="og:updated_time" content="2017-10-20T07:42:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《javaScript高级程序设计－第6章》之封装类">
+<meta name="twitter:description" content="一、工厂模式所谓的工厂模式就是，把创建具体对象的过程抽象成了一个函数，每次调用这个函数都会返回一个相似的对象。1234567891011121314function createPerson(name, age, job)&amp;#123;var o = new Object();    o.name = name;    o.age = age;    o.job = job;    o.sayNam">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/19/uploads/img7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/"/>
+
+
+
+
+
+  <title>读《javaScript高级程序设计－第6章》之封装类 | chenfengjuan</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50c15455e37f70aea674ff4a663eef27";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chenfengjuan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个前端菜鸟的主页</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读《javaScript高级程序设计－第6章》之封装类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T19:24:20+08:00">
+                2017-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/19/读《javaScript高级程序设计－第6章》之封装类/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、工厂模式"><a href="#一、工厂模式" class="headerlink" title="一、工厂模式"></a>一、工厂模式</h2><p>所谓的工厂模式就是，把创建具体对象的过程抽象成了一个函数，每次调用这个函数都会返回一个相似的对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function createPerson(name, age, job)&#123;</div><div class="line">var o = new Object();</div><div class="line">    o.name = name;</div><div class="line">    o.age = age;</div><div class="line">    o.job = job;</div><div class="line">    o.sayName = function()&#123;</div><div class="line">alert(this.name);</div><div class="line">    &#125;;   </div><div class="line">    return o;</div><div class="line">&#125;</div><div class="line">var person1 = createPerson(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);</div><div class="line">var person2 = createPerson(&quot;Greg&quot;, 27, &quot;Doctor&quot;);</div><div class="line">person1.sayName();   //&quot;Nicholas&quot;</div><div class="line">person2.sayName();   //&quot;Greg&quot;</div></pre></td></tr></table></figure></p>
+<p><strong>工厂模式虽然解决了创建多个相似对象的问题，但却没有解决对象识别的问题（即怎样知道一个对象的类型）。</strong></p>
+<h2 id="二、构造函数模式"><a href="#二、构造函数模式" class="headerlink" title="二、构造函数模式"></a>二、构造函数模式</h2><p>js里经常如此写<code>var obj=new Object();var arr=new Array();</code>，<code>Object</code>和<code>Array</code>就是构造函数，使用<code>new</code>操作符可以创建相应类型的对象，使用<code>instanceof</code>可以验证对象的类型，例如：<br><code>alert(arr instance Array);      //true</code><br>构造函数模式就是，自定义像<code>Array</code>和<code>Object</code>等这样的构造函数，并使用new操作符调用它来创建自定义类型对象的方法。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">    this.job = job;</div><div class="line">    this.sayName = function()&#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">var person1 = new Person(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);</div><div class="line">var person2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);</div><div class="line"></div><div class="line">person1.sayName();   //&quot;Nicholas&quot;</div><div class="line">person2.sayName();   //“Greg”</div></pre></td></tr></table></figure></p>
+<ul>
+<li>new操作符<br>使用new操作符调用，Person就是一个构造函数<br>要创建Person的新实例，必须使用new操作符。以这种方式调用构造函数实际上会经历一下4个步骤：<br>  （1）创建一个新对象<br>  （2）将构造函数的作用域赋给新对象，即把构造函数的this指向这个新对象<br>  （3）执行构造函数中的代码（为这个新对象添加属性）<br>  （4）返回新对象</li>
+</ul>
+<p>如果不使用new，Person就是一个普通的函数，可以正常调用。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//作为普通函数在全局作用域下调用</div><div class="line">Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);  //adds to window</div><div class="line">window.sayName();   //“Greg&quot;</div><div class="line">//作为普通函数在另一个对象中调用</div><div class="line">var o = new Object();</div><div class="line">Person.call(o, &quot;Kristen&quot;, 25, &quot;Nurse&quot;);</div><div class="line">o.sayName();    //&quot;Kristen&quot;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>检测类型<br><code>alert(person1 instanceof Object);  //true</code><br><code>alert(person1 instanceof Person);//true</code></li>
+</ul>
+<p>综上，创建自定义的构造函数，意味着将来可以将它的实例标识为一种特定的类型（类似于Array类型，Number类型）；而这正是构造函数模式胜过工厂模式的地方。但是构造函数模式也存在缺点。</p>
+<ul>
+<li>构造函数模式的问题<br><strong>使用构造函数的主要问题就是，每个方法都要在每个实例上重新创建一遍（实例化一次Function对象），浪费内存。</strong>例如，person1和person2都有一个sayName()的方法，但创建person1和person2时候，定义sayName这个方法时都实例化了一个函数对象，因此person1.sayName和person2.sayName是不相等的，而事实上它们又是做的同样的事情。或者也可以这么说，person1和person2的sayName()方法做同样的事情，但却在创建对象时被实例化了两次，也就占用了两倍内存。<br>虽然可以解决，但并不完美，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">    this.job = job;</div><div class="line">    this.sayName = sayName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function sayName()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var person1 = new Person(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);</div><div class="line">var person2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor”);</div><div class="line">alert(person1.sayName == person2.sayName);  //true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>但是如果共享方法有很多，就需要定义很多个全局函数，那么我们的自定义的引用类型就丝毫没有封装性可言了。好在，这些问题可以通过使用原型模式解决。</p>
+<h2 id="3、原型模式"><a href="#3、原型模式" class="headerlink" title="3、原型模式"></a>3、原型模式</h2><h4 id="（1）理解原型对象"><a href="#（1）理解原型对象" class="headerlink" title="（1）理解原型对象"></a>（1）理解原型对象</h4><p><strong>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个<code>prototype</code>属性，这个属性就是该函数的原型对象。每个函数都有一个原型对象，所有原型对象都会自动获得<code>constructor</code>属性，<code>constructor</code>指向该函数（拥有该<code>prototype</code>属性的函数）。</strong><br>例如，<code>Person.prototype.constructor</code>指向<code>Person</code>。<br>创建构造函数后，其原型对象默认只会取得<code>constructor</code>属性；至于其他的方法都是从<code>Object</code>继承来的（<code>__proto__</code>）。当调用构造函数创建一个新实例后，该实例内部将包含一个指针（<code>__proto__</code>），指向构造函数的原型对象。（ECMA-262第5版中管这个指针叫<code>[[Prototype]]</code>,但在脚本中没有标准的方式访问它。在chrome，safari和firefox中都支持一个属性<code>__proto__</code>，但在其他实现中<code>__proto__</code>对脚本是不可见的）。所以和实例有直接关系的是构造函数的原型对象，而不是构造函数。<br><img src="../uploads/img7.png" alt=""><br>上图展示了Person构造函数、Person的原型对象和Person现有的两个实例之间的关系。</p>
+<p>####（2）实例属性和原型属性：<br><strong>原型属性即构造函数的原型对象的属性；实例属性即在实例对象上直接添加的属性。</strong><br>例如：person1.name=“Jone”。<br>通过点运算符可以访问到实例的实例属性和原型属性。<strong>实例访问属性时，脚本会先搜索实例属性，如果找到了，则停止搜索返回实例属性的值；如果没找到就继续搜索原型属性。所以如果实例属性和原型属性同名，那么原型属性就会被屏蔽掉，无法访问到。</strong><br>需要注意的是：<strong>实例无法修改他的原型属性的值，也无法修改原型对象（即不能修改、删除和增加一个原型属性）</strong><br> <em>（注意：实例不能修改的是原型属性的值，但是如果原型属性指向一个引用类型，原型属性的值是存储这个引用类型的地址，即不能修改原型属性指向另一个对象，但却能修改原型属性指向的对象里的属性。下面原型对象的问题里还会再讲到）</em>。<br>如果<code>person1.name=“Jone”</code>这样写，脚本只会在实例属性里创建或修改一个<code>name=“Jone”</code>的属性，<code>delete person1.name</code>只会删除<code>person1</code>的实例属性<code>name</code>（就算实例没有<code>name</code>的实例属性，也不会删除实例的原型属性）。</p>
+<p>####（3）和原型对象有关的几个方法</p>
+<ul>
+<li><p>isPrototypeOf()<br><code>alert(Person.prototype.isPrototypeOf(person1));    //true</code><br>如果<code>person1</code>的<code>[[prototype]]</code>  （即<code>__proto__</code>）指向调用<code>isPrototypeOf</code>的对象即<code>Person.prototype</code>就会返回<code>true</code>。<br>即判断<code>Person.prototype</code>是否是<code>person1</code>的<code>[[prototype]]</code></p>
+</li>
+<li><p>Object.getPrototypeOf()<br><code>alert(Object.getPrototypeOf(person1)==Person.prototype);   //true</code><br>返回<code>person1</code>这个对象的原型<code>[[prototype]]</code></p>
+</li>
+<li><p>hasOwnProperty()<br><code>person1.hasOwnProperty(“name”);</code>    如果<code>person1.name</code>是来自于<code>person1</code>的实例属性，返回<code>true</code>；如果来自于<code>person1</code>的原型属性，则返回<code>false</code>。</p>
+</li>
+</ul>
+<p>####（4）原型与in操作符<br>有两种方式使用in操作符：<br>单独使用in：<code>alert(“name” in person1);   //true</code><br>在通过person1能够访问给定属性是返回true，无论属性是实例属性还是原型属性。<br>在for-in循环中使用：返回的是所有能够通过对象访问的、可枚举的属性，其中包括实例属性也包括原型属性。</p>
+<ul>
+<li>Object.keys()<br>接受一个对象作为参数，返回一个包含对象的所有可枚举属性的字符串数组。<br>如果对象是一个实例，则只返回实例的实例属性而不包含原型属性</li>
+<li>Object.getOwnPropertyNames()<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> var keys = Object.getOwnPropertyNames(Person.prototype);</div><div class="line"> alert(keys);   //&quot;constructor,name,age,job,sayName”</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>得到对象的所有实例属性，无论它是否可枚举</p>
+<h4 id="（5）更简单的原型语法"><a href="#（5）更简单的原型语法" class="headerlink" title="（5）更简单的原型语法"></a>（5）更简单的原型语法</h4><p>所谓的更简单的原型写法就是用字面量的形式来定义构造函数的原型对象，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    name : &quot;Nicholas&quot;,</div><div class="line">    age : 29,</div><div class="line">    job: &quot;Software Engineer&quot;,</div><div class="line">    sayName : function () &#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">var friend = new Person();</div><div class="line"></div><div class="line">alert(friend instanceof Object);  //true</div><div class="line">alert(friend instanceof Person);  //true</div><div class="line">alert(friend.constructor == Person);  //false</div><div class="line">alert(friend.constructor == Object);  //true</div></pre></td></tr></table></figure></p>
+<p>这样定义完了之后，<code>Person.prototype</code>这个对象就被重写了，导致它的<code>constructor</code>这个属性的指向变成了<code>Object</code>,而不是<code>Person</code><br><em>(解释：<code>Person.prototype</code>是<code>Object</code>的一个实例，所以它有一个原型属性<code>constructor</code>指向<code>Object</code>。<code>Person</code>被创建时，它的原型对象<code>Person.prototype</code>自动获得了一个<code>constructor</code>的属性，指向<code>Person</code>，这个属性是对象的实例的实例属性，所以会屏蔽掉对象的原型属性，所以说<code>Person.prototype.constructor</code>是指向<code>Person</code>的。但是用字面量重写了<code>Person.prototype</code>后，<code>Person.prototype</code>仍是<code>Object</code>的一个实例，所以它有一个原型属性<code>constructor</code>指向<code>Object</code>，但它没有了指向<code>Person</code>的实例属性<code>constructor</code>，所以在访问<code>Person.prototype.constructor</code>时，就是访问了<code>Person.prototype</code>对象的原型属性，指向了<code>Object</code>)。</em><br>但我们可以再把它定义进这个对象字面量里手动指向<code>Person</code>，即给<code>Person.prototype</code>这个对象的实例加一个实例属性<code>constructor</code>，指向<code>Person</code>。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    constructor: Person,</div><div class="line">    name : &quot;Nicholas&quot;,</div><div class="line">    age : 29,</div><div class="line">    job: &quot;Software Engineer&quot;,</div><div class="line">    sayName : function () &#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>我们知道如此定义对象，对象的属性的<code>[[enumerable]]</code>特性默认是<code>true</code>。而默认情况下，原声的原型对象的<code>constructor</code>属性是不可枚举的，因此如果你使用兼容ES5的javaScript引擎，可以使用<code>Object.defineProperty()</code>来设置<code>constructor</code>属性。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//重设构造函数，只适用于ES5兼容的浏览器</div><div class="line">Object.difineProperty(Person.prototype,”constructor”,&#123;</div><div class="line">    enumerable:false,</div><div class="line">    value:Person</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="（6）原型的动态性"><a href="#（6）原型的动态性" class="headerlink" title="（6）原型的动态性"></a>（6）原型的动态性</h4><p><strong>简单点来说，就是实例的<code>[[prototype]]</code>是指向构造函数的原型对象，而不是构造函数。</strong>只要你明白这一点，原型的动态性就好理解了。<br>第一种情况：<code>Person.prototype</code>可以在任意地方增加修改或删除属性，实例可以实时的访问最新的原型属性。因为每次实例访问属性，都是一次搜索的过程，搜索原型属性时是到实例的<code>[[prototype]]</code>指向的对象里查找。实例的<code>[[prototype]]</code>是一个指针，<code>Person.prototype</code>也是一个指针，指向的是同一个地址，也就是说修改和查找都在同一个地方，那么查找到的值自然就是最新实时的了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;</div><div class="line">&#125;</div><div class="line">var friend = new Person();</div><div class="line">Person.prototype.sayHi = function()&#123;</div><div class="line">    alert(&quot;hi&quot;);</div><div class="line">&#125;;</div><div class="line">friend.sayHi();   //&quot;hi&quot;</div></pre></td></tr></table></figure></p>
+<p>第二种情况：在实例被创建之后，<code>Person.prototype</code>被重写了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var friend = new Person();</div><div class="line">       </div><div class="line">Person.prototype = &#123;</div><div class="line">    constructor: Person,</div><div class="line">    name : &quot;Nicholas&quot;,</div><div class="line">    age : 29,</div><div class="line">    job : &quot;Software Engineer&quot;,</div><div class="line">    sayName : function () &#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">friend.sayName();   //error</div></pre></td></tr></table></figure></p>
+<p>这种情况是因为：实例一旦被创建，实例的<code>[[prototype]]</code>存储的地址就确定了，指向的对象地址就确定了，如果你改变这个地址里的对象，实例都可以访问的到。但是如果在实例被创建之后，重写<code>Person.prototype</code>，就相当于是把<code>Person.prototype</code>指向了一个新的对象，而实例的<code>[[prototype]]</code>还是指向原来的对象，所以实例访问的原型属性还是要在原来的对象里查找，原来的对象里并没有<code>sayName</code>这个方法，因此会报错。</p>
+<h4 id="（7）原生对象的原型"><a href="#（7）原生对象的原型" class="headerlink" title="（7）原生对象的原型"></a>（7）原生对象的原型</h4><p>我们用原型模式创建自定义类型，让自定义类型和原生类型一样使用。其实所有的原生的对象（Object、Array、String，等等）也是采用的原型模式创建的。所有原生的引用类型都在其构造函数的原型上定义了方法。<br>例如，在<code>Array.prototype</code>中可以找到<code>sort()</code>方法，而在<code>String.prototype</code>中可以找到<code>substring()</code>方法。<br>通过原生对象的原型，不仅可以取得所有默认方法的引用，也可以定义新的方法。可以像修改自定义对象的原型一样修改原生对象的原型，因此可以随时添加方法。但是不建议如此做<em>（在支持该方法的实现中运行代码时会导致命名冲突，或者意外重写了原生方法）</em>。</p>
+<h4 id="（7）原型对象的问题"><a href="#（7）原型对象的问题" class="headerlink" title="（7）原型对象的问题"></a>（7）原型对象的问题</h4><p><strong>首先，原型模式省略了为构造函数传递参数，初始化实例的环节，使得所有实例默认时都是一样的。<br>其次，原型模式的共享本性使得所有的实例都能共享它的属性。</strong><br>如果属性值是函数或者是基本值时，实例不能修改原型属性的值，只会为该实例增加一个同名属性，然后屏蔽掉同名原型属性，这样其它的实例都不会受到影响，使用的仍然是原型属性原来的值。<br>如果属性值是引用类型，实例虽不能修改原型属性的值（这个值就是指向的对象的地址），即实例不能让这个原型属性重新指向另一个对象，但是却可以修改指向的对象的属性，这就会导致其它实例再访问这个对象时，对象已被修改了。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    constructor: Person,</div><div class="line">    name : &quot;Nicholas&quot;,</div><div class="line">    age : 29,</div><div class="line">    job : &quot;Software Engineer&quot;,</div><div class="line">    friends : [&quot;Shelby&quot;, &quot;Court&quot;],</div><div class="line">    sayName : function () &#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1 = new Person();</div><div class="line">var person2 = new Person();</div><div class="line"></div><div class="line">person1.friends.push(&quot;Van&quot;);</div><div class="line"></div><div class="line">alert(person1.friends);    //&quot;Shelby,Court,Van&quot;</div><div class="line">alert(person2.friends);    //&quot;Shelby,Court,Van&quot;</div><div class="line">alert(person1.friends === person2.friends);  //true</div></pre></td></tr></table></figure></p>
+<p>这样就违反了我们希望实例拥有属于自己的全部属性的初衷</p>
+<h2 id="4、组合使用构造函数模式和原型模式"><a href="#4、组合使用构造函数模式和原型模式" class="headerlink" title="4、组合使用构造函数模式和原型模式"></a>4、组合使用构造函数模式和原型模式</h2><p><strong>综合前面所说的，我们发现构造函数模式优点在于能向构造函数传递，定义属于实例自己的实例属性。原型模式优点在于共享着对方法的引用，原型属性是所有实例所共享的。</strong><br>所以创建自定义类型的最常见方式，就是组合使用构造函数模式与原型模式<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">    this.job = job;</div><div class="line">    this.friends = [&quot;Shelby&quot;, &quot;Court&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    constructor: Person,</div><div class="line">    sayName : function () &#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1 = new Person(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);</div><div class="line">var person2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);</div><div class="line"></div><div class="line">person1.friends.push(&quot;Van&quot;);</div><div class="line"></div><div class="line">alert(person1.friends);    //&quot;Shelby,Court,Van&quot;</div><div class="line">alert(person2.friends);    //&quot;Shelby,Court&quot;</div><div class="line">alert(person1.friends === person2.friends);  //false</div><div class="line">alert(person1.sayName === person2.sayName);  //true</div></pre></td></tr></table></figure></p>
+<h2 id="5、动态原型模式"><a href="#5、动态原型模式" class="headerlink" title="5、动态原型模式"></a>5、动态原型模式</h2><p>这一小节，私以为了解了解就好，只要你理解了上面所说的构造函数模式和原型模式的原理，那么原型属性的定义你可以随心所欲，只要符合你的预期就好。你高兴就好，代码高兴就好。</p>
+<h2 id="6、寄生构造函数模式"><a href="#6、寄生构造函数模式" class="headerlink" title="6、寄生构造函数模式"></a>6、寄生构造函数模式</h2><p>与工厂模式的区别是使用new 调用。不使用new调用，它就是工厂模式。<br>这一小节，私以为了解了解就好。</p>
+<h2 id="7、稳妥构造函数模式"><a href="#7、稳妥构造函数模式" class="headerlink" title="7、稳妥构造函数模式"></a>7、稳妥构造函数模式</h2><p>与工厂模式的区别是对象定义的方法不使用this，构造函数传进来的参数不向外直接暴露。<br>这一小节，私以为了解了解就好。</p>
+<p><em>好了，封装类的几种方式已经介绍完了。我的观点是理解了对象和构造函数模式以及原型模式，就可以随机应变了。不需要记住什么什么各种模式的，无非就是使用对象的场景不同。要理解对象和构造函数以及原型对象，灵活变换，无招胜有招才好。</em></p>
+<p><em>这是我读《javaScript高级程序设计》这本书的第6章面向对象的程序设计，做的笔记，在本篇之前还有一篇理解对象的笔记，后面还有一篇继承的笔记。发现问题的小伙伴欢迎指出。</em></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/" rel="next" title="读《javaScript高级程序设计－第6章》之理解对象">
+                <i class="fa fa-chevron-left"></i> 读《javaScript高级程序设计－第6章》之理解对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/20/读《javaScript高级程序设计－第6章》之继承/" rel="prev" title="读《javaScript高级程序设计－第6章》之继承">
+                读《javaScript高级程序设计－第6章》之继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/19/读《javaScript高级程序设计－第6章》之封装类/"
+           data-title="读《javaScript高级程序设计－第6章》之封装类" data-url="http://yoursite.com/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/myIcon.jpeg"
+               alt="chenfengjuan" />
+          <p class="site-author-name" itemprop="name">chenfengjuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个城市风很大，孤独的人晚回家</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/iissnan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/iissnan" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/iissnan" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      DouBan
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/iissnan" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      ZhiHu
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、工厂模式"><span class="nav-number">1.</span> <span class="nav-text">一、工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、构造函数模式"><span class="nav-number">2.</span> <span class="nav-text">二、构造函数模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、原型模式"><span class="nav-number">3.</span> <span class="nav-text">3、原型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）理解原型对象"><span class="nav-number">3.0.1.</span> <span class="nav-text">（1）理解原型对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（5）更简单的原型语法"><span class="nav-number">3.0.2.</span> <span class="nav-text">（5）更简单的原型语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（6）原型的动态性"><span class="nav-number">3.0.3.</span> <span class="nav-text">（6）原型的动态性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（7）原生对象的原型"><span class="nav-number">3.0.4.</span> <span class="nav-text">（7）原生对象的原型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（7）原型对象的问题"><span class="nav-number">3.0.5.</span> <span class="nav-text">（7）原型对象的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、组合使用构造函数模式和原型模式"><span class="nav-number">4.</span> <span class="nav-text">4、组合使用构造函数模式和原型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、动态原型模式"><span class="nav-number">5.</span> <span class="nav-text">5、动态原型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、寄生构造函数模式"><span class="nav-number">6.</span> <span class="nav-text">6、寄生构造函数模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、稳妥构造函数模式"><span class="nav-number">7.</span> <span class="nav-text">7、稳妥构造函数模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenfengjuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"notes-iissnan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

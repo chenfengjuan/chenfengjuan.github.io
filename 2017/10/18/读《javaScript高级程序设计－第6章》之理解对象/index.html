@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="ECMA－262把对象定义为：无序属性的集合，其属性可以包含基本值、对象或函数。所以，我们可以理解对象就是名值对的集合，名就是对象的每个属性的名字，而每个名字都映射到一个值。 一、创建对象创建对象有两种方式： 方式一12345678var person=new Object();person.name=“Jone”;person.age=20;person.job=“Software Engine">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《javaScript高级程序设计－第6章》之理解对象">
+<meta property="og:url" content="http://yoursite.com/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/index.html">
+<meta property="og:site_name" content="chenfengjuan">
+<meta property="og:description" content="ECMA－262把对象定义为：无序属性的集合，其属性可以包含基本值、对象或函数。所以，我们可以理解对象就是名值对的集合，名就是对象的每个属性的名字，而每个名字都映射到一个值。 一、创建对象创建对象有两种方式： 方式一12345678var person=new Object();person.name=“Jone”;person.age=20;person.job=“Software Engine">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-20T07:42:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《javaScript高级程序设计－第6章》之理解对象">
+<meta name="twitter:description" content="ECMA－262把对象定义为：无序属性的集合，其属性可以包含基本值、对象或函数。所以，我们可以理解对象就是名值对的集合，名就是对象的每个属性的名字，而每个名字都映射到一个值。 一、创建对象创建对象有两种方式： 方式一12345678var person=new Object();person.name=“Jone”;person.age=20;person.job=“Software Engine">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/"/>
+
+
+
+
+
+  <title>读《javaScript高级程序设计－第6章》之理解对象 | chenfengjuan</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50c15455e37f70aea674ff4a663eef27";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chenfengjuan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个前端菜鸟的主页</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读《javaScript高级程序设计－第6章》之理解对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T19:10:13+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ECMA－262把对象定义为：无序属性的集合，其属性可以包含基本值、对象或函数。所以，我们可以理解对象就是名值对的集合，名就是对象的每个属性的名字，而每个名字都映射到一个值。</p>
+<h2 id="一、创建对象"><a href="#一、创建对象" class="headerlink" title="一、创建对象"></a>一、创建对象</h2><p>创建对象有两种方式：</p>
+<h4 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=new Object();</div><div class="line">person.name=“Jone”;</div><div class="line">person.age=20;</div><div class="line">person.job=“Software Engineer”;</div><div class="line"></div><div class="line">person.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var person=&#123;</div><div class="line">    name:”Jone”,</div><div class="line">    age:20,</div><div class="line">    job:“Software Engineer”,</div><div class="line">    </div><div class="line">    sayName:function()&#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这两种方式创建的对象都是一样的。也可以灵活的混合使用，但要记住<code>var person=new Object()</code>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var person=&#123;</div><div class="line">    name:”Jone”,</div><div class="line">    age:20,</div><div class="line">    job:“Software Engineer”,</div><div class="line">    </div><div class="line">    sayName:function()&#123;</div><div class="line">        alert(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>都是在为person赋值，<strong>不可重复赋值，如果重复使用就相当于前面的值放弃，使用后来重新赋的值。或者说都是在给person指向了一个新的地址，地址里存着新的对象。person确定是一个引用类型了，就可以在任意的地方用点来为它添加属性和访问属性，例如：<code>person.sex=“女”</code>。person用点访问时不会再为person更改指向地址，更改的是地址里存着的对象。</strong></p>
+<h2 id="二、对象属性的特性"><a href="#二、对象属性的特性" class="headerlink" title="二、对象属性的特性"></a>二、对象属性的特性</h2><p>对象的属性可以分为两种属性：数据属性，访问器属性。两种类型的属性有各自的特性。</p>
+<ul>
+<li><p>数据属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[[configurable]]:表示能否通过delete删除属性，能否修改属性的特性，或者能否把属性修改为访问器属性。</div><div class="line">[[enumerable]]:表示能否通过for-in循环返回属性。</div><div class="line">[[writable]]:表示能否修改属性的值。</div><div class="line">[[value]]:包含这个属性的数据值。读取属性值的时候，从这个位置读取；写入属性值的时候，把新值保存在这个位置。这个特性的默认值是undefined。</div><div class="line">像上面的例子那样直接在对象上定义的属性，它们的configurable、enumerable、writable这些特性默认值为true。</div></pre></td></tr></table></figure>
+</li>
+<li><p>访问器属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[[configurable]]:表示能否通过delete删除属性，能否修改属性的特性，或者能否把属性修改为访问器属性。</div><div class="line">[[enumerable]]:表示能否通过for-in循环返回属性。</div><div class="line">[[get]]:在读取属性时调用的函数。默认值是undefined</div><div class="line">[[set]]:在写入属性时调用的函数。默认值是undefined</div><div class="line">像上面的例子那样直接在对象上定义的属性，它们的configurable、enumerable这些特性默认值为true。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>访问器属性的使用方式即：设置一个属性的值会导致其他属性发生变化。<br> <strong>访问器属性的<code>get</code>、<code>set</code>特性不能直接定义,而是使用<code>Object.defineProperty()</code>来定义，属性的<code>get</code>、<code>set</code>特性和<code>writable</code>、<code>value</code>特性不能同时存在。</strong></p>
+<ul>
+<li>特性的访问方法：</li>
+</ul>
+<ol>
+<li>Object.defineProperty()<br>例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var book=&#123;&#125;;</div><div class="line">Object.defineProperty(book,”year”,&#123;</div><div class="line">    configurable:true,</div><div class="line">    value:2004</div><div class="line">&#125;);</div><div class="line">Object.defineProperty(person,”_year”,&#123;</div><div class="line">    configurable:true,</div><div class="line">    get:function()&#123;</div><div class="line">        return this.year;</div><div class="line">    &#125;,</div><div class="line">    set:function(newValue)&#123;</div><div class="line">        if(newValue&gt;2004)&#123;</div><div class="line">            this.year=newValue;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>创建一个新属性，或修改一个属性的特性。创建一个新属性时，如果不指定，<code>configurable</code>、<code>enumerable</code>、<code>writable</code>默认值都为<code>false</code>。<code>configurable</code>一旦被设置为<code>false</code>，就不能再把它变回<code>true</code>了，此时，再调用<code>Object.defineProperty()</code>修改除<code>writable</code>之外的特性都会报错。</strong></p>
+<ol>
+<li><p>Object.defineProperties()<br>可以一次性定义多个属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var book=&#123;&#125;;</div><div class="line">Object.defineProperties(book,&#123;</div><div class="line">    year:&#123;</div><div class="line">        configurable:true,</div><div class="line">        value:2004</div><div class="line">    &#125;,</div><div class="line">    _year:&#123;</div><div class="line">        configurable:true,</div><div class="line">        get:function()&#123;</div><div class="line">            return this.year;</div><div class="line">        &#125;,</div><div class="line">        set:function(newValue)&#123;</div><div class="line">            if(newValue&gt;2004)&#123;</div><div class="line">                this.year=newValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.getOwnPropertyDescriptor()<br>用来读取属性的特性。接受两个参数：属性所在的对象和要读取其特性的属性名,返回的时其特性的对象<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var descriptor=Object.getOwnPropertyDescriptor(book,”year”);</div><div class="line">            alert(descriptor.value);//2004</div><div class="line">            alert(descriptor.configurable);//true</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>读《javaScript高级程序设计》这本书的第6章面向对象的程序设计，我做了3篇笔记。这是第一篇，后面还有两篇，分别是封装类和继承。</em><br><em>以前一直认为真正理解了一个问题，你就能把它讲清楚，讲清楚了再把它写清楚就容易了，现在发现要写清楚真的太难了，要斟酌每句话都不是废话，没有歧义，尽量用少的字句等等。废话了好久也不知道写清楚了吗。</em><br><em>如果哪里有问题欢迎指出。</em></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/17/CSS清浮动/" rel="next" title="CSS清浮动">
+                <i class="fa fa-chevron-left"></i> CSS清浮动
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/" rel="prev" title="读《javaScript高级程序设计－第6章》之封装类">
+                读《javaScript高级程序设计－第6章》之封装类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/"
+           data-title="读《javaScript高级程序设计－第6章》之理解对象" data-url="http://yoursite.com/2017/10/18/读《javaScript高级程序设计－第6章》之理解对象/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/myIcon.jpeg"
+               alt="chenfengjuan" />
+          <p class="site-author-name" itemprop="name">chenfengjuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个城市风很大，孤独的人晚回家</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/iissnan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/iissnan" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/iissnan" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      DouBan
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/iissnan" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      ZhiHu
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、创建对象"><span class="nav-number">1.</span> <span class="nav-text">一、创建对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式一"><span class="nav-number">1.0.1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方式二"><span class="nav-number">1.0.2.</span> <span class="nav-text">方式二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、对象属性的特性"><span class="nav-number">2.</span> <span class="nav-text">二、对象属性的特性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenfengjuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"notes-iissnan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

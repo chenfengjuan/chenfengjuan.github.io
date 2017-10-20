@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《javaScript高级程序设计－第6章》之继承">
+<meta property="og:url" content="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/index.html">
+<meta property="og:site_name" content="chenfengjuan">
+<meta property="og:description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img8.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img9.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img10.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img11.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/20/uploads/img12.png">
+<meta property="og:updated_time" content="2017-10-20T07:38:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《javaScript高级程序设计－第6章》之继承">
+<meta name="twitter:description" content="读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。 一、原型链原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。下面用代码和图来详细分析一下原型链中的各种关系：123456789101112">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/20/uploads/img8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/"/>
+
+
+
+
+
+  <title>读《javaScript高级程序设计－第6章》之继承 | chenfengjuan</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50c15455e37f70aea674ff4a663eef27";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chenfengjuan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个前端菜鸟的主页</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">读《javaScript高级程序设计－第6章》之继承</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T15:23:57+08:00">
+                2017-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/20/读《javaScript高级程序设计－第6章》之继承/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/20/读《javaScript高级程序设计－第6章》之继承/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>读这篇之前，最好是已读过我前面的关于对象的理解和封装类的笔记。</em></p>
+<h2 id="一、原型链"><a href="#一、原型链" class="headerlink" title="一、原型链"></a>一、原型链</h2><p>原型链最简单的理解就是：原型对象指向另一个构造函数的实例。此时的原型对象包括一个指向另一个原型的指针，相应的，另一个原型中的constructor指向另一个构造函数。这种关系层层递进，就通过一个原型对象链接另一个构造函数的原型对象的方式实现了继承。<br>下面用代码和图来详细分析一下原型链中的各种关系：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">    this.property = true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">SuperType.prototype.getSuperValue = function()&#123;</div><div class="line">    return this.property;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">    this.subproperty = false;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//inherit from SuperType</div><div class="line">SubType.prototype = new SuperType();</div><div class="line"></div><div class="line">SubType.prototype.getSubValue = function ()&#123;</div><div class="line">    return this.subproperty;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var instance = new SubType();</div><div class="line">alert(instance.getSuperValue());   //true</div><div class="line">alert(instance.getSubValue());   //false</div><div class="line">alert(instance instanceof Object);      //true</div><div class="line">alert(instance instanceof SuperType);   //true</div><div class="line">alert(instance instanceof SubType);     //true</div><div class="line"></div><div class="line">alert(Object.prototype.isPrototypeOf(instance));    //true</div><div class="line">alert(SuperType.prototype.isPrototypeOf(instance)); //true</div><div class="line">alert(SubType.prototype.isPrototypeOf(instance));   //true</div><div class="line">console.log(new SuperType());</div><div class="line">console.log(instance);</div></pre></td></tr></table></figure></p>
+<p>下图是上面代码中打印出来的new SuperType()和instance的分析：<br><img src="../uploads/img8.png" alt=""><br>从上面的分析我们看到的原型链：<br>SubType的原型里有指向SuperType的原型的指针，SuperType的原型里有指向Object的原型的指针。<br>也可以看红皮书里的图：<br><img src="../uploads/img9.png" alt=""></p>
+<ul>
+<li>访问属性的搜索过程：<br>当以读取模式访问一个构造函数（SubType）的实例的属性时，首先会在实例中搜索实例属性。如果没找到该属性，则会继续搜索实例的原型；SubType继承了SuperType，那么实例的原型是另一个构造函数（SuperType）的实例，搜索实例的原型也就是在SuperType的实例中搜索该属性，没找到继续搜索SuperType的原型；SuperType继承了Object，以此递进，一层层搜索，直到找到或者搜到了原型链的末端停下来。</li>
+<li>判断原型和实例的关系</li>
+</ul>
+<p>(1)instanceof<br>实例的原型链中出现过待检测的构造函数，就会返回true<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alert(instance instanceof Object);      //true</div><div class="line">alert(instance instanceof SuperType);   //true</div><div class="line">alert(instance instanceof SubType);     //true</div></pre></td></tr></table></figure></p>
+<p>(2)isPrototypeOf()方法<br>待检测对象出现在instance的原型链中，就会返回true<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alert(Object.prototype.isPrototypeOf(instance));    //true</div><div class="line">alert(SuperType.prototype.isPrototypeOf(instance)); //true</div><div class="line">alert(SubType.prototype.isPrototypeOf(instance));   //true</div></pre></td></tr></table></figure></p>
+<ul>
+<li>注意事项</li>
+</ul>
+<p>(1)给原型添加方法的代码一定要放在替换原型的语句之后。也就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SubType.prototype = new SuperType();这句代码一定要先写，在写下面的代码</div><div class="line">//new method</div><div class="line">SubType.prototype.getSubValue = function ()&#123;</div><div class="line">    return this.subproperty;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//override existing method</div><div class="line">SubType.prototype.getSuperValue = function ()&#123;</div><div class="line">    return false;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>(2)在通过原型链实现继承时，不能使用对象字面量为原型添加属性，因为这会重写原型链（具体请看理解对象篇里的一、创建对象）。<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">    this.property = true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">SuperType.prototype.getSuperValue = function()&#123;</div><div class="line">    return this.property;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">    this.subproperty = false;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//继承了 SuperType</div><div class="line">SubType.prototype = new SuperType();</div><div class="line"></div><div class="line">//使用字面量添加新方法，会导致上一行代码无效</div><div class="line">SubType.prototype = &#123;</div><div class="line">    getSubValue : function ()&#123;</div><div class="line">        return this.subproperty;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    someOtherMethod : function ()&#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var instance = new SubType();</div><div class="line">alert(instance.getSuperValue());   //error!</div></pre></td></tr></table></figure></p>
+<p>其实这两个注意事项，只要你明白了（理解对象篇里的一、创建对象）后，根本不需要解释。</p>
+<ul>
+<li>原型链的问题</li>
+</ul>
+<p>(1)没有办法在不影响所有对象实例的情况下，给超类型的构造函数传递参数。</p>
+<p>(2)在另一篇笔记封装类原型模式中提到过，原型中的属性是被共享的，但如果属性的值时引用类型，会有问题的。而在继承时，原型实际上会是另一个类型的实例（这个实例包含引用类型值的实例属性），那么原先的这个实例的实例属性就会成为现在的原型属性了，就会出现同样的问题了。共享了引用类型值的属性。</p>
+<h2 id="二、借用构造函数"><a href="#二、借用构造函数" class="headerlink" title="二、借用构造函数"></a>二、借用构造函数</h2><p>直接上代码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function SubType()&#123; </div><div class="line">    //继承了 SuperType ，同时还传递了参数</div><div class="line">    SuperType.call(this, &quot;Nicholas&quot;);</div><div class="line">   </div><div class="line">    //实例属性</div><div class="line">    this.age = 29;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var instance = new SubType();</div><div class="line">alert(instance.name);    //&quot;Nicholas&quot;;</div><div class="line">alert(instance.age);     //29</div></pre></td></tr></table></figure></p>
+<p>如上写法就解决了原型链里的两个问题了，为什么呢？请看下面的讲解：<br><strong>SuperType，如果你用new调用它是构造函数，但你不用new，它就是个普通函数。SuperType.call(this, “Nicholas”);不但传递了参数，还绑定了子类的作用域，就相当于SuperType方法在帮助定义子类的实例属性。也就是说，即使SuperType的中定义的属性里有引用类型值，也不会成为子类SubType的原型属性，仍然时实例属性。我们要时刻记住实例属性是每个实例所私有的，而原型属性是会被所有实例所共享的。</strong></p>
+<p>当然这也写也不完美，问题显而易见，和构造函数模式同样的问题。</p>
+<h2 id="三、组合继承"><a href="#三、组合继承" class="headerlink" title="三、组合继承"></a>三、组合继承</h2><p>组合继承，就像是封装类里的把构造函数模式和原型模式组合使用是一样的。这里是把原型链和借用构造函数相组合。<br>简单来说就是：<strong>使用原型链实现对原型属性和方法的继承，通过借用构造函数实现对实例属性的继承（父类的实例属性变成子类的实例属性）。</strong><br>还是上代码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">    this.name = name;    this.colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];&#125;</div><div class="line"></div><div class="line">SuperType.prototype.sayName = function()&#123;</div><div class="line">    alert(this.name);&#125;;function SubType(name, age)&#123; </div><div class="line">    SuperType.call(this, name);       this.age = age;&#125;</div><div class="line"></div><div class="line">SubType.prototype = new SuperType();SubType.prototype.sayAge = function()&#123;</div><div class="line">    alert(this.age);&#125;;var instance1 = new SubType(&quot;Nicholas&quot;, 29);instance1.colors.push(&quot;black&quot;);alert(instance1.colors);  //&quot;red,blue,green,black&quot;instance1.sayName();      //&quot;Nicholas&quot;;instance1.sayAge();       //29</div><div class="line">var instance2 = new SubType(&quot;Greg&quot;, 27);alert(instance2.colors);  //&quot;red,blue,green&quot;instance2.sayName();      //&quot;Greg&quot;;instance2.sayAge();       //27</div></pre></td></tr></table></figure></p>
+<p>解释:<br>下图是instance1的打印<br><img src="../uploads/img10.png" alt=""><br><strong>我们可以看到instance1具有了父类SuperType的实例属性name 、colors，但是子类的原型是父类的实例，所以原型中仍存在父类的实例属性，但是子类已经有了同样的实例属性name和colors，所以子类原型中的这两个属性就被屏蔽了。从子类访问它的name和colors属性只会访问到它的实例属性。</strong></p>
+<p>组合继承是javaScript中最常用的继承模式。而且instance和isPrototypeOf()也能够用于识别给予组合继承创建的对象类型。</p>
+<h2 id="四、原型式继承"><a href="#四、原型式继承" class="headerlink" title="四、原型式继承"></a>四、原型式继承</h2><p>感兴趣可以了解一下。<br>原型链中，我们是让原型对象指向一个构造函数的实例，这个实例本质上就是一个对象。原型式继承就是让原型对象指向一个已有的对象，不必创建自定义类型。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function object(o)&#123;</div><div class="line">    function F()&#123;&#125;</div><div class="line">    F.prototype = o;</div><div class="line">    return new F();</div><div class="line">&#125;</div><div class="line">var person = &#123;</div><div class="line">    name: &quot;Nicholas&quot;,</div><div class="line">    friends: [&quot;Shelby&quot;, &quot;Court&quot;, &quot;Van&quot;]</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var anotherPerson = object(person);</div><div class="line">anotherPerson.name = &quot;Greg&quot;;</div><div class="line">anotherPerson.friends.push(&quot;Rob&quot;);</div><div class="line"></div><div class="line">var yetAnotherPerson = object(person);</div><div class="line">yetAnotherPerson.name = &quot;Linda&quot;;</div><div class="line">yetAnotherPerson.friends.push(&quot;Barbie&quot;);</div><div class="line">console.log(person.friends);   //&quot;Shelby,Court,Van,Rob,Barbie”</div></pre></td></tr></table></figure></p>
+<p>大家还记得原型模式吗。我的理解：这就是一个原型模式，区别是object这个方法就相当于一个工厂，你传给它一个对象，它就给你一个原型是这个对象的实例。这个实例就会相应的继承到了你传给它的那个对象的属性。<br>当然你也可以不用自己写上面的object这个方法，因为ES5提供了，而且更规范。ES5中新增了<code>Object.create()</code>方法规范化了原型式继承。这个方法接受两个参数：一个是用做新对象原型的对象和（可选）一个为新对象定义额外属性的对象<em>(或者说是定义新对象的实例属性的对象，这个参数和defineProperties()方法的第二个参数格式相同：每个属性都是通过自己的描述符定义的)</em>。<br>上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">    name: &quot;Nicholas&quot;,</div><div class="line">    friends: [&quot;Shelby&quot;, &quot;Court&quot;, &quot;Van&quot;]</div><div class="line">&#125;;</div><div class="line">                  </div><div class="line">var anotherPerson = Object.create(person, &#123;</div><div class="line">    name: &#123;</div><div class="line">        value: &quot;Greg&quot;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">console.log(anotherPerson);</div></pre></td></tr></table></figure></p>
+<p>打印结果图：<br><img src="../uploads/img11.png" alt=""><br>从上图可以看到第二个参数定义的name属性是新对象的实例属性，它会屏蔽掉它的原型属性里的同名属性name。简单来说，Object.create就是用原型模式创建新对象的一个工厂，第一个参数定义了原型属性，第二个参数定义了实例属性。</p>
+<h2 id="五、寄生式继承"><a href="#五、寄生式继承" class="headerlink" title="五、寄生式继承"></a>五、寄生式继承</h2><p>这一小节，感兴趣了解一下。</p>
+<h2 id="六、寄生组合式继承"><a href="#六、寄生组合式继承" class="headerlink" title="六、寄生组合式继承"></a>六、寄生组合式继承</h2><p><strong>前面说过，组合继承是js里最常用的继承模式，但是它并不完美。问题是：调用了两次超类SuperType的构造函数，子类创建了一部分多余的属性（这部分属性是超类的实例属性，在子类的实例属性里存在并有用，但在子类的原型中也存在且没用）。寄生组合式继承就是解决这个问题的。</strong><br>上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">function object(o)&#123;</div><div class="line">    function F()&#123;&#125;</div><div class="line">    F.prototype = o;    </div><div class="line">    return new F();</div><div class="line">&#125;</div><div class="line"></div><div class="line">function inheritPrototype(subType, superType)&#123;</div><div class="line">    var prototype = object(superType.prototype);   //create object    </div><div class="line">    prototype.constructor = subType;               //augment object    </div><div class="line">    subType.prototype = prototype;                 //assign object</div><div class="line">&#125;</div><div class="line">                       </div><div class="line">function SuperType(name)&#123;</div><div class="line">    this.name = name;    </div><div class="line">    this.colors = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">SuperType.prototype.sayName = function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line">function SubType(name, age)&#123; </div><div class="line">    SuperType.call(this, name);</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">inheritPrototype(SubType, SuperType);</div><div class="line">SubType.prototype.sayAge = function()&#123;</div><div class="line">    alert(this.age);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var instance1 = new SubType(&quot;Nicholas&quot;, 29);</div><div class="line">instance1.colors.push(&quot;black&quot;);</div><div class="line">alert(instance1.colors);  //&quot;red,blue,green,black&quot;</div><div class="line">instance1.sayName();      //&quot;Nicholas&quot;</div><div class="line">instance1.sayAge();       //29var </div><div class="line">instance2 = new SubType(&quot;Greg&quot;, 27);</div><div class="line">alert(instance2.colors);  //&quot;red,blue,green&quot;</div><div class="line">instance2.sayName();      //&quot;Greg&quot;</div><div class="line">instance2.sayAge();       //27</div><div class="line">console.log(instance1);</div><div class="line">console.log(SuperType.prototype);</div></pre></td></tr></table></figure></p>
+<p>代码运行打印结果图：<br><img src="../uploads/img12.png" alt=""><br>从图中可以看到instance1（子类实例）的原型里已经没有了超类的实例属性name、colors。而且代码中只运行了一次超类构造函数。怎么做到的呢？请看下面的解释：<br>我们先看这段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function inheritPrototype(subType, superType)&#123;</div><div class="line">    var prototype = object(superType.prototype);   //create object</div><div class="line">    prototype.constructor = subType;               //augment object</div><div class="line">    subType.prototype = prototype;                 //assign object</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>subType的原型还是指向了一个对象，这个对象是什么呢？object这个方法返回的对象，这个对象是一个构造函数是空的，原型指向超类原型的实例。什么意思呢？就是说subType的原型还是一个构造函数的实例，但不是超类SuperType的实例，而是一个新建的临时的空的构造函数F的实例。看代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function object(o)&#123;</div><div class="line">    function F()&#123;&#125;</div><div class="line">    F.prototype = o;</div><div class="line">    return new F();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个临时的构造函数F具有和超类SuperType一样的原型。那么这个时候的子类的原型中就只有F的实例属性和原型，而F的实例属性是空的，就只有F的原型，F的原型就是超类SuperType的原型。这样子类的实例属性还是继承了超类的实例属性，而子类的原型属性只继承了超类的原型。完美，就这样。</p>
+<p>啰嗦一句我对面向对象程序设计的理解，面向对象程序设计就是一直在说如何使用对象。其实，只要结果符合你的预期，对象真的是想怎么使用就怎么使用，不一定非得像书中说的什么各种模式的。当然书中的这么多种模式方法的介绍可以了解一下<em>（但是构造函数模式、原型模式。以及继承里的原型链、借用构造函数。还包括它们的组合使用还是需要认真研读，深刻理解的。再顺便说一句，继承里的原型链、借用构造函数可以看作是原型模式和构造函数模式的进化）</em>，可以加深自己对对象的理解，有助于你花式使用对象的方法。哈哈哈</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/19/读《javaScript高级程序设计－第6章》之封装类/" rel="next" title="读《javaScript高级程序设计－第6章》之封装类">
+                <i class="fa fa-chevron-left"></i> 读《javaScript高级程序设计－第6章》之封装类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/20/读《javaScript高级程序设计－第6章》之继承/"
+           data-title="读《javaScript高级程序设计－第6章》之继承" data-url="http://yoursite.com/2017/10/20/读《javaScript高级程序设计－第6章》之继承/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/myIcon.jpeg"
+               alt="chenfengjuan" />
+          <p class="site-author-name" itemprop="name">chenfengjuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个城市风很大，孤独的人晚回家</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/iissnan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/iissnan" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/iissnan" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      DouBan
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/iissnan" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      ZhiHu
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、原型链"><span class="nav-number">1.</span> <span class="nav-text">一、原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、借用构造函数"><span class="nav-number">2.</span> <span class="nav-text">二、借用构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、组合继承"><span class="nav-number">3.</span> <span class="nav-text">三、组合继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、原型式继承"><span class="nav-number">4.</span> <span class="nav-text">四、原型式继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、寄生式继承"><span class="nav-number">5.</span> <span class="nav-text">五、寄生式继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、寄生组合式继承"><span class="nav-number">6.</span> <span class="nav-text">六、寄生组合式继承</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenfengjuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"notes-iissnan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
