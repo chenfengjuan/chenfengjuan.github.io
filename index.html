@@ -280,6 +280,743 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/网络分层里七层模型.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/javaScript高级程序设计/网络分层里七层模型.html" itemprop="url">网络分层里七层模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:48:13+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript高级程序设计/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript高级程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/javaScript高级程序设计/网络分层里七层模型.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="javaScript高级程序设计/网络分层里七层模型.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  463
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="../uploads/position4.png" alt=""></p>
+<p>七层模型介绍：<br><strong>物理层：</strong>物理层负责最后将信息编码成电流脉冲或其它信号用于网上传输。</p>
+<blockquote>
+<p>eg：RJ45等将数据转化成0和1</p>
+</blockquote>
+<p><strong>数据链路层：</strong>数据链路层通过物理网络链路供数据传输。不同的数据链路层定义了不同的w网络和协议特征，其中包括物理编址、网络拓扑结构、错误校验数据帧序列以及流控。</p>
+<blockquote>
+<p>可以简单的理解为：规定了0和1的分包形式，确定了网络数据包的形式</p>
+</blockquote>
+<p><strong>网络层：</strong>网络层负责在源和终点之间建立连接</p>
+<blockquote>
+<p>可以理解为，此处需要确定计算机的位置，怎么确定？IPv4，IPv6</p>
+</blockquote>
+<p><strong>传输层：</strong>传输层向高层提供可靠的端到端的网络数据流服务</p>
+<blockquote>
+<p>可以理解为：每一个应用程序都会在网卡注册一个端口号，该层就是端口与端口的通信！常用的（TCP／IP）协议</p>
+</blockquote>
+<p><strong>会话层：</strong>会话层建立、管理和终止表示层与实体之间的通信会话</p>
+<blockquote>
+<p>建立一个连接（自动的手机信息、自动的网络寻址）</p>
+</blockquote>
+<p><strong>表示层：</strong>表示层供多种功能用于应用层数据编码和转化，以确保以一个系统应用层发送的消息可以被另一个系统应用层识别</p>
+<blockquote>
+<p>可以理解为：解决不同系统之间的通信，eg：Linux下的QQ和Windows下的QQ可以通信</p>
+</blockquote>
+<p><strong>应用层：</strong>应用层协议包括文件的传输、访问及管理协议（FTAM），以及文件虚拟终端协议（VIP）和公用管理系统信息（CMIP）等；</p>
+<blockquote>
+<p>规定数据的传输协议；常见的应用层协议：HTTP，HTTPS，FTP</p>
+</blockquote>
+<p><strong>参考资料:</strong><br><a href="http://www.jianshu.com/p/4b9d43c0571a" target="_blank" rel="external">网络七层模型&amp;&amp;网络数据包</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/HTTP状态码.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/javaScript高级程序设计/HTTP状态码.html" itemprop="url">HTTP状态码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:47:57+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript高级程序设计/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript高级程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/javaScript高级程序设计/HTTP状态码.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="javaScript高级程序设计/HTTP状态码.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  665
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>1xx(临时响应)表示临时响应并需要请求者继续执行操作的状态代码。</p>
+</blockquote>
+<p><strong>100 (继续) </strong>请求者应当继续提出请求。 服务器返回此代码表示已收到请求的第一部分，正在等待其余部分。<br><strong>101 (切换协议) </strong>请求者已要求服务器切换协议，服务器已确认并准备切换。</p>
+<blockquote>
+<p>2xx (成功)表示成功处理了请求的状态代码</p>
+</blockquote>
+<p><strong>200 (成功) </strong>服务器已成功处理了请求。 通常，这表示服务器提供了请求的网页。<br><strong>201 (已创建) </strong>请求成功并且服务器创建了新的资源。<br><strong>202 (已接受) </strong>服务器已接受请求，但尚未处理。<br><strong>203 (非授权信息) </strong>服务器已成功处理了请求，但返回的信息可能来自另一来源。<br><strong>204 (无内容) </strong>服务器成功处理了请求，但没有返回任何内容。<br><strong>205 (重置内容) </strong>服务器成功处理了请求，但没有返回任何内容。<br><strong>206 (部分内容) </strong>服务器成功处理了部分 GET 请求。</p>
+<blockquote>
+<p>3xx (重定向) 表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向</p>
+</blockquote>
+<p><strong>301(永久移动)</strong>请求的网页已永久移动到新位置。 服务器返回此响应(对 GET 或 HEAD 请求的响应)时，会自动将请求者转到新位置。<br><strong>302 (临时移动) </strong>服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。<br><strong>303 (查看其他位置)</strong> 请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码。<br><strong>304 (未修改) </strong>自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。<br><strong>305 (使用代理) </strong>请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理。<br><strong>307 (临时重定向)</strong> 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</p>
+<blockquote>
+<p>4xx(请求错误) 这些状态代码表示请求可能出错，妨碍了服务器的处理。</p>
+</blockquote>
+<p><strong>400 (错误请求) </strong>服务器不理解请求的语法。<br><strong>401 (未授权) </strong>请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。<br><strong>403 (禁止) </strong>服务器拒绝请求。<br><strong>404 (未找到) </strong>服务器找不到请求的网页。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/从浏览器输入地址，到渲染页面.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/javaScript高级程序设计/从浏览器输入地址，到渲染页面.html" itemprop="url">从浏览器输入地址，到渲染页面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:47:16+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript高级程序设计/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript高级程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/javaScript高级程序设计/从浏览器输入地址，到渲染页面.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="javaScript高级程序设计/从浏览器输入地址，到渲染页面.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  12
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>下图中使用了Nginx代理服务器：<br><img src="../uploads/position3.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/CSS/解析position的值.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/CSS/解析position的值.html" itemprop="url">解析position的值</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:37:26+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/CSS/解析position的值.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="CSS/解析position的值.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,099
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>position:static;</code>//position的默认值，表示元素按照标准文档流定位，设置left，top，right，bottom，z-index无效。</p>
+<p><code>position:relative;</code>//按照标准文档流相对定位，不设置left，top，right，bottom，z-index时，位置和static时一样，设置left，top，right，bottom，z-index时会相对于它在static时的位置定位。其他的元素的位置则不会受该元素的影响发生位置改变来弥补它偏离后剩下的空隙。也就是说其它元素的位置和它是static时一样。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">#div2&#123;</div><div class="line">    background: gold;</div><div class="line">    height: 150px;</div><div class="line">    margin-left: 20px;</div><div class="line">    width: 200px;</div><div class="line">&#125;</div><div class="line">#div3&#123;</div><div class="line">    position: relative;</div><div class="line">    left: 20px;</div><div class="line">    top: 20px;</div><div class="line">    width: 100px;</div><div class="line">    background: saddlebrown;</div><div class="line">    height: 100px;</div><div class="line">&#125;</div><div class="line">#div4&#123;</div><div class="line">	width: 100px;</div><div class="line">	height: 80px;</div><div class="line">	background: darkblue;</div><div class="line"> &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;div id=&quot;div2&quot;&gt;</div><div class="line">     &lt;div id=&quot;div3&quot;&gt;&lt;/div&gt;</div><div class="line">     &lt;div id=&quot;div4&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="../uploads/position1.png" alt=""><br>div3是relative定位，位置偏移了，但div4的位置仍然和div3为偏移时一样。</p>
+<p><code>position: absolute;</code>脱离文档流的绝对定位。脱离文档流意味着文档流里的元素会当它不存在一样定位。absolute是相对于它的第一个定位不是static的祖先元素定位。如果绝对定位（position属性的值为absolute）的元素没有“positioned”祖先元素，那么它是相对于文档的 body 元素，并且它会随着页面滚动而移动。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">        #div2&#123;</div><div class="line">            background: gold;</div><div class="line">            height: 150px;</div><div class="line">            margin-left: 20px;</div><div class="line">            width: 200px;</div><div class="line">            position: relative;</div><div class="line">        &#125;</div><div class="line">        #div3&#123;</div><div class="line">            position: absolute;</div><div class="line">            right: 20px;</div><div class="line">            bottom: 20px;</div><div class="line">            width: 100px;</div><div class="line">            background: saddlebrown;</div><div class="line">            height: 100px;</div><div class="line">        &#125;</div><div class="line">        #div4&#123;</div><div class="line">            width: 100px;</div><div class="line">            height: 80px;</div><div class="line">            background: darkblue;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;div id=&quot;div2&quot;&gt;</div><div class="line">    div2</div><div class="line">    &lt;div id=&quot;div3&quot;&gt;div3&lt;/div&gt;</div><div class="line">    &lt;div id=&quot;div4&quot;&gt;div4&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="../uploads/position2.png" alt=""></p>
+<p><code>position:fixed;</code>脱离文档流的固定定位，元素会相对于视窗来定位，这意味着即便页面滚动，它还是会停留在相同的位置。和 relative 一样， top 、 right 、 bottom 和 left 属性都可用。</p>
+<p><code>position:sticky&#39;</code>粘性定位。是一个新的css3属性。</p>
+<p>它的表现类似position:relative和position:fixed的合体，在目标区域在屏幕中可见时，它的行为就像position:relative; 而当页面滚动超出目标区域时，它的表现就像position:fixed，它会固定在目标位置。<strong>（这是网上的大多数说法，但不完全对，这只适用于sticky定位元素是body的子元素时的情况。如果sticky定位元素的父元素，情况就会不一样。具体的请看下面的代码分析）</strong></p>
+<p>但总的来说元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位，只是固定定位相对的对象比较复杂不一定是浏览器窗口。<br>并且 top 和 bottom 同时设置时，top 生效的优先级高，left 和 right 同时设置时，left 的优先级高</p>
+<p>以下是我经过测试后的结果：<br><strong>position:sticky生效条件：</strong><br>1、设置了top或bottom，left或right<br>2、父元素要全部可见，这里的可见是指父元素本身不能被父元素的父级元素的overflow:hidden给盖住，使父元素的最小高度不能全部可见。<br>3、父元素本身不能设置overflow:hidden。<br>4、如果父元素的overflow的值为auto、scroll等使得父元素的内容不溢出的属性时，sticky定位的元素的定位是相对于它的父元素的而不是浏览器窗口。如果父元素的内容允许溢出且溢出内容超出浏览器窗口，sticky定位的元素的定位是相对于浏览器窗口的。<br><strong>下面是测试代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"> &lt;style type=&quot;text/css&quot;&gt;</div><div class="line">        body&#123;</div><div class="line">            margin: 0;</div><div class="line">            padding: 0;</div><div class="line">        &#125;</div><div class="line">        #bottom&#123;</div><div class="line">            width: 100%;</div><div class="line">            height: 70px;</div><div class="line">            line-height: 70px;</div><div class="line">            text-align: center;</div><div class="line">            background: lightblue;</div><div class="line">            position: sticky;</div><div class="line">            margin: 0;</div><div class="line">            bottom: 0px;</div><div class="line">        &#125;</div><div class="line">        #top&#123;</div><div class="line">            width: 100%;</div><div class="line">            height: 70px;</div><div class="line">            line-height: 70px;</div><div class="line">            text-align: center;</div><div class="line">            background: lightblue;</div><div class="line">            position: sticky;</div><div class="line">            margin: 0;</div><div class="line">            top: 0px;</div><div class="line">        &#125;</div><div class="line">        #div0&#123;</div><div class="line">            width: 100%;</div><div class="line">            height: 200px;</div><div class="line">        &#125;</div><div class="line">        #div1&#123;</div><div class="line">            height: 400px;</div><div class="line">//分别调整height:800px，调整overflow的值为auto，visible等值可以看到效果</div><div class="line">            overflow: auto;</div><div class="line">        &#125;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;div id=&quot;div0&quot;&gt;</div><div class="line">	&lt;div id=&quot;div1&quot;&gt;</div><div class="line">	&lt;h2 id=&quot;top&quot;&gt;顶部&lt;/h2&gt;</div><div class="line">	&lt;ul&gt;</div><div class="line">		    &lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;&lt;li&gt;内容&lt;/li&gt;</div><div class="line">	    </div><div class="line">	&lt;/ul&gt;</div><div class="line">	&lt;div id=&quot;bottom&quot;&gt;底部&lt;/div&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/读《javaScript高级程序设计－第6章》之继承.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1448,164 +2185,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/跨域.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chenfengjuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/myIcon.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chenfengjuan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/uncategorized/跨域.html" itemprop="url">跨域</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T14:51:50+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/uncategorized/跨域.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="uncategorized/跨域.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  291
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>jsonp<br>jsonp解决跨域问题的本质：<code>&lt;script&gt;</code> 标签可以请求不同域名下的资源，即<code>&lt;script&gt;</code>请求不受浏览器同源策略影响。<br>首先给body动态添加一个<code>&lt;script&gt;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.setAttribute(&quot;type&quot;,&quot;text/javascript&quot;);</div><div class="line">script.src = &apos;http://example.com/ip?callback=foo&apos;;</div><div class="line">document.body.appendChild(script);</div><div class="line"></div><div class="line">function foo(data) &#123;</div><div class="line">  console.log(&apos;Your public IP address is: &apos; + data.ip);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>上面的script会向<code>http://example.com/</code>服务器发送请求，这个请求的url后面带了个callback参数，是用来告诉服务器回调方法的方法名的。因为服务器收到请求后，会把相应数据写进foo的参数位置，也就是说服务器会返回的脚本如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo(&#123;</div><div class="line">    &quot;ip&quot;: &quot;8.8.8.8&quot;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure></p>
-<p>这样浏览器通过<code>&lt;script&gt;</code>下载的资源就是上面的脚本了，<code>&lt;script&gt;</code>下载完成就会立即执行，也就是说<code>http://example.com/ip?callback=foo</code>这个请求返回后就会立即执行上面的脚本代码，而这个脚本代码就是调用回调方法和拿到json数据了。</p>
-<p>接下来我会总结cors，iframe，Access-Control-Allow-Origin等实现跨域访问方法，后续总结请稍候。。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1651,7 +2237,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="跨域问题的场景和解决方案多种多样，只要是做前端开发，总会遇到。而且面试时也是必问的问题。所以自己学习总结记录一下。 因为浏览器的同源策略，前端开发会遇到各种跨域问题。本篇文章总结了遇到跨域问题的不同的场景以及对应的解决方案。 前言在总结各种跨域问题之前，我们先来了解一下浏览器的同源策略。协议、域名、端口都相同才叫同源。具体的这里就不赘述了。  同源政策的目的，是为了保证用户信息的安全，防止恶意的网">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域问题汇总">
+<meta property="og:url" content="http://yoursite.com/javaScript高级程序设计/跨域.html">
+<meta property="og:site_name" content="chenfengjuan">
+<meta property="og:description" content="跨域问题的场景和解决方案多种多样，只要是做前端开发，总会遇到。而且面试时也是必问的问题。所以自己学习总结记录一下。 因为浏览器的同源策略，前端开发会遇到各种跨域问题。本篇文章总结了遇到跨域问题的不同的场景以及对应的解决方案。 前言在总结各种跨域问题之前，我们先来了解一下浏览器的同源策略。协议、域名、端口都相同才叫同源。具体的这里就不赘述了。  同源政策的目的，是为了保证用户信息的安全，防止恶意的网">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-29T09:46:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域问题汇总">
+<meta name="twitter:description" content="跨域问题的场景和解决方案多种多样，只要是做前端开发，总会遇到。而且面试时也是必问的问题。所以自己学习总结记录一下。 因为浏览器的同源策略，前端开发会遇到各种跨域问题。本篇文章总结了遇到跨域问题的不同的场景以及对应的解决方案。 前言在总结各种跨域问题之前，我们先来了解一下浏览器的同源策略。协议、域名、端口都相同才叫同源。具体的这里就不赘述了。  同源政策的目的，是为了保证用户信息的安全，防止恶意的网">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/javaScript高级程序设计/跨域.html"/>
+
+
+
+
+
+  <title>跨域问题汇总 | chenfengjuan</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50c15455e37f70aea674ff4a663eef27";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chenfengjuan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个前端菜鸟的主页</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/javaScript高级程序设计/跨域.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenfengjuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myIcon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chenfengjuan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">跨域问题汇总</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T14:51:50+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript高级程序设计/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript高级程序设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/javaScript高级程序设计/跨域.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="javaScript高级程序设计/跨域.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,407
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>跨域问题的场景和解决方案多种多样，只要是做前端开发，总会遇到。而且面试时也是必问的问题。所以自己学习总结记录一下。</em></p>
+<p><em>因为浏览器的同源策略，前端开发会遇到各种跨域问题。本篇文章总结了遇到跨域问题的不同的场景以及对应的解决方案。</em></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在总结各种跨域问题之前，我们先来了解一下浏览器的同源策略。<br>协议、域名、端口都相同才叫同源。具体的这里就不赘述了。</p>
+<blockquote>
+<p>同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。<br>设想这样一种情况：A网站是一家银行，用户登录以后，又去浏览其他网站。如果其他网站可以读取A网站的 Cookie，会发生什么？<br>很显然，如果 Cookie 包含隐私（比如存款总额），这些信息就会泄漏。更可怕的是，Cookie 往往用来保存用户的登录状态，如果用户没有退出登录，其他网站就可以冒充用户，为所欲为。因为浏览器同时还规定，提交表单不受同源政策的限制。<br>由此可见，”同源政策”是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。</p>
+</blockquote>
+<p><strong>受到同源限制：</strong></p>
+<p>1）无法读取不同源的 Cookie、LocalStorage 和 IndexDB 。<br>2）无法获得不同源的DOM 。<br>3）不能向不同源的服务器发送ajax请求。</p>
+<p><strong>不受同源限制：</strong><br>在浏览器中，<code>&lt;script&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code>、<code>&lt;link&gt;</code>等标签都可以跨域加载资源，而不受同源策略的限制。</p>
+<p><strong>浏览器对跨域访问的判定：</strong><br>CORS机制把跨域请求分为两类：简单请求和非简单请求。</p>
+<blockquote>
+<p>1) 请求方法是以下三种方法之一：HEAD、GET、POST<br>2）HTTP的头信息不超出以下几种字段：<br>Accept<br>Accept-Language<br>Content-Language<br>Last-Event-ID<br>Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain<br>凡是不同时满足上面两个条件，就属于非简单请求。浏览器对这两种请求的处理，是不一样的。</p>
+</blockquote>
+<p><strong>简单请求：</strong>浏览器会带上Origin的请求头发送到服务器，服务器根据Origin判断是否许可。如果许可就会带上CORS相关想要头，如果不在许可范围内就不会带上CORS相关的响应头。浏览器再根据响应头中是否有相关的CORS响应头，来判断拦截响应body和抛出错误。<br><strong>非简单请求：</strong>非简单请求会在发真正的请求之前发送一个OPTIONS的带着Origin、Access-Control-Request-Method、Access-Control-Request-Headers等CORS相关的请求头的预检请求到服务器，服务器确认可以这样请求，就会返回带着Access-Control-Allow-Origin、Access-Control-Allow-Methods、Access-Control-Allow-Headers等CORS相关的响应头的响应，浏览器检查到相关的CORS响应头，说明通过预检可以继续发送真正的请求；服务器确认不可以，则不会返回这些相关响应头，浏览器没检查到CORS的响应头就会抛出错误。</p>
+<h2 id="代理跨域"><a href="#代理跨域" class="headerlink" title="代理跨域"></a>代理跨域</h2><p><strong>场景1：</strong>你的项目myweb，myweb的前端有一个接口是去访问一个非myweb的服务器。非myweb服务器是第三方服务器，你不能去对第三方服务器做改动。<br><strong>场景2：</strong>你的项目是个微服务架构的。那你的前端页面可能就需要去很多个服务器上访问数据。</p>
+<p> <strong>原理解析：</strong><br>跨域请求报错归根结底是浏览器禁止使用XHR对象向不同源的服务器地址发起HTTP请求。如果是服务器跨域向多个不同的服务器发送请求就不会有跨域问题存在。因此，我们可以让浏览器只向一个服务器方式请求，让这个服务器代替浏览器去不同的服务器上请求资源再返回给浏览器。这个服务器就是代理服务器了。</p>
+<p>下面推荐一个常用代理服务器nginx。</p>
+<p><strong>什么是nginx? </strong><br>  Nginx (engine x) 是一款轻量级的Web 服务器 、反向代理服务器及电子邮件（IMAP/POP3）代理服务器。</p>
+<p>把ui所在的服务器和跨域服务器都用nginx代理转发，浏览器访问nginx，nginx到ui服务获取ui，再把ui下载到浏览器，浏览器发起ui中的URL，该URL为Nginx封装后的跨域服务器的URL或ui服务器的URL，该URL到达Nginx之后，会被转发到跨域服务器或ui服务器，请求处理完毕后，会通过Nginx中转返回给浏览器。暴露出来的或者浏览器所发起的url都是nginx的url，nginx去跨域服务器和ui服务器获取响应，返给浏览器，这样就没有跨域问题了。</p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p><strong>场景：</strong><br>前后端分离的开发模式下，在本地进行接口联调时：也许在你的项目里，你想尝试前后端分离的开发模式。你在本地开发时，mock了一些假数据来帮助自己本地开发。而有一天，你希望在本地和后端同学进行联调。此时，后端rd的接口地址和你发生了跨域问题。这阻止了你们的联调，你只能继续使用你mock的假数据。</p>
+<p><strong>解决方案：</strong><br>CORS需要浏览器和服务器同时支持。如何支持？请看<strong>浏览器对跨域访问的判定</strong>小节。<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。<br>服务器要给接口的响应头设置：Access-Control-Allow-Origin：＊</p>
+<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p><strong>场景：跨域发送get请求</strong></p>
+<p>jsonp解决跨域问题的本质：<code>&lt;script&gt;</code> 标签可以请求不同域名下的资源，即<code>&lt;script&gt;</code>请求不受浏览器同源策略影响。<br>首先给body动态添加一个<code>&lt;script&gt;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.setAttribute(&quot;type&quot;,&quot;text/javascript&quot;);</div><div class="line">script.src = &apos;http://example.com/ip?callback=foo&apos;;</div><div class="line">document.body.appendChild(script);</div><div class="line"></div><div class="line">function foo(data) &#123;</div><div class="line">  console.log(&apos;Your public IP address is: &apos; + data.ip);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>上面的script会向<code>http://example.com/</code>服务器发送请求，这个请求的url后面带了个callback参数，是用来告诉服务器回调方法的方法名的。因为服务器收到请求后，会把相应数据写进foo的参数位置，也就是说服务器会返回的脚本如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo(&#123;</div><div class="line">    &quot;ip&quot;: &quot;8.8.8.8&quot;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure></p>
+<p>这样浏览器通过<code>&lt;script&gt;</code>下载的资源就是上面的脚本了，<code>&lt;script&gt;</code>下载完成就会立即执行，也就是说<code>http://example.com/ip?callback=foo</code>这个请求返回后就会立即执行上面的脚本代码，而这个脚本代码就是调用回调方法和拿到json数据了。</p>
+<h2 id="通过document-domain跨域"><a href="#通过document-domain跨域" class="headerlink" title="通过document.domain跨域"></a>通过document.domain跨域</h2><p><strong>场景1：</strong>你的<code>http://www.damonare.cn/a.html</code>页面里使用<code>&lt;iframe&gt;</code>调用另一个<code>http://damonare.cn/b.html</code>页面。这时候你想在a页面里获取b页面里的dom，然后进行操作。然后你会发现你不能获得b的dom。<code>document.getElementById(&quot;myIFrame&quot;).contentWindow.document</code>或<code>window.parent.document.body</code>因为两个窗口不同源而报错。</p>
+<p><strong>解决方案：</strong>这时候你只需要在a页面里和b页面里把<code>document.domain</code>设置成相同的值就可以在两个页面里操作Dom了。</p>
+<p><strong>场景2：</strong>你在<code>http://www.damonare.cn/a.html</code>页面里写入了<code>document.cookie = &quot;test1=hello&quot;;</code>你在<code>http://damonare.cn/b.html</code>页面是拿不到这个cookie的。</p>
+<p><strong>解决方案：</strong>Cookie 是服务器写入浏览器的一小段信息，只有同源的网页才能共享。但是，两个网页一级域名相同，只是二级域名不同，浏览器允许通过设置document.domain共享 Cookie。另外，服务器也可以在设置Cookie的时候，指定Cookie的所属域名为一级域名。这样的话，二级域名和三级域名不用做任何设置，都可以读取这个Cookie。</p>
+<p><strong>注意：</strong><br><code>document.domain</code>限制：虽然可读写，但只能设置成自身或者是高一级的父域且主域必须相同。所以只能解决一级域名相同二级域名不同的跨域问题。<br><code>document.domain</code>只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexDB 无法通过这种方法跨域。</p>
+<h2 id="通过window-name跨域"><a href="#通过window-name跨域" class="headerlink" title="通过window.name跨域"></a>通过window.name跨域</h2><p>场景1：现在浏览器的一个标签页里打开<code>http://www.damonare.cn/a.html</code>页面，你通过location.href=<code>http://baidu.com/b.html</code>，在同一个浏览器标签页里打开了不同域名下的页面。这时候这两个页面你可以使用<code>window.name</code>来传递参数。因为<code>window.name</code>指的是浏览器窗口的名字，只要浏览器窗口相同，那么无论在哪个网页里访问值都是一样的。</p>
+<p>场景2：你的<code>http://www.damonare.cn/a.html</code>页面里使用<code>&lt;iframe&gt;</code>调用另一个<code>http://baidu.com/b.html</code>页面。这时候你想在a页面里获取b页面里的dom，然后进行操作。然后你会发现你不能获得b的dom。同样会因为不同源而报错，和上面提到的不同之处就是两个页面的一级域名也不相同。这时候<code>document.domain</code>就解决不了了。<strong>（这种情况我没测试出来，还需要实验）</strong></p>
+<p>解决方案：浏览器窗口有<code>window.name</code>属性。这个属性的最大特点是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。。比如你在b页面里设定<code>window.name=&quot;hello&quot;</code>，你再返回到a页面，在a页面里访问<code>window.name</code>，可以得到<code>hello</code>。</p>
+<p>这种方法的优点是，window.name容量很大，可以放置非常长的字符串；缺点是必须监听子窗口window.name属性的变化，影响网页性能。</p>
+<h2 id="通过HTML5的postMessage方法跨域"><a href="#通过HTML5的postMessage方法跨域" class="headerlink" title="通过HTML5的postMessage方法跨域"></a>通过HTML5的postMessage方法跨域</h2><p><strong>场景1:</strong>在a页面里打开了另一个不同源的页面b，你想要让a和b两个页面互相通信。比如，a要访问b的LocalStorage。</p>
+<p><strong>场景2:</strong>你的a页面里的<code>iframe</code>的src是不同源的b页面，你想要让a和b两个页面互相通信。比如，a要访问b的LocalStorage。</p>
+<p><strong>解决方案：</strong>HTML5y引入了一个全新的API，跨文档通信 API（Cross-document messaging）。这个API为window对象新增了一个<code>window.postMessage</code>方法，允许跨窗口通信，不论这两个窗口是否同源。a就可以把它的LocalStorage，发送给b，b也可以把自己的LocalStorage发给a。</p>
+<p>window.postMessage(message, targetOrigin, [transfer])，有三个参数：</p>
+<blockquote>
+<p><strong>message</strong>是向目标窗口发送的数据；<br><strong>targetOrigin</strong>属性来指定哪些窗口能接收到消息事件，其值可以是字符串”<em>“（表示无限制）或者一个URI（或者说是发送消息的目标域名）；<br><em>*transfer</em></em>可选参数，是一串和message 同时传递的 Transferable 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。</p>
+</blockquote>
+<p>另外消息的<strong>接收方必须有监听事件</strong>，否则发送消息时就会报错。<code>The target origin provided (&#39;http://localhost:8080&#39;) does not match the recipient window&#39;s origin (&#39;http://localhost:63343&#39;).</code></p>
+<p><code>window.addEventListener(&quot;message&quot;,onmessage);</code>onmessage接收到的message事件包含三个属性：</p>
+<blockquote>
+<p><strong>data：</strong>从其他 window 中传递过来的数据。<br><strong>origin：</strong>调用 postMessage  时消息发送方窗口的 origin 。请注意，这个origin不能保证是该窗口的当前或未来origin，因为postMessage被调用后可能被导航到不同的位置。<br><strong>source：</strong>对发送消息的窗口对象的引用; 您可以使用此来在具有不同origin的两个窗口之间建立双向通信。</p>
+</blockquote>
+<p>例子：我在a页面执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var popup = window.open(&apos;http://localhost:3000&apos;, &apos;title&apos;);</div><div class="line">popup.postMessage(&apos;Hello World!&apos;, &apos;http://localhost:3000&apos;);</div></pre></td></tr></table></figure></p>
+<p>同时在<a href="http://localhost:3000的页面里监听message事件：" target="_blank" rel="external">http://localhost:3000的页面里监听message事件：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">window.onload=function () &#123;</div><div class="line">      window.addEventListener(&quot;message&quot;,onmessage);</div><div class="line">&#125;</div><div class="line">function onmessage(event) &#123;</div><div class="line">      if(event.origin==&quot;http://localhost:63343&quot;)&#123;//http://localhost:63343是发送方a的域名</div><div class="line">	      console.log(event.data);//&apos;Hello World!&apos;</div><div class="line">      &#125;</div><div class="line">      console.log(event.data);//&apos;Hello World!&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意: 在 Gecko 6.0 (Firefox 6.0 / Thunderbird 6.0 / SeaMonkey 2.3)之前， 参数 message 必须是一个字符串。 从 Gecko 6.0 (Firefox 6.0 / Thunderbird 6.0 / SeaMonkey 2.3)开始，参数 message被使用结构化克隆算法进行序列化。这意味着您可以将各种各样的数据对象安全地传递到目标窗口，而不必自己序列化它们。</p>
+</blockquote>
+<h2 id="通过location-hash跨域"><a href="#通过location-hash跨域" class="headerlink" title="通过location.hash跨域"></a>通过location.hash跨域</h2><p>location.hash就是指URL的#号后面的部分。<br><strong>场景：</strong><br>父窗口和iframe的子窗口之间通讯或者是window.open打开的子窗口之间的通讯。<br><strong>解决方案：</strong><br>父窗口改变子窗口的url的#号后面的部分，后者把要传递的参数写在#后面，子窗口监听window.onhashchange事件，得到通知，读取window.location.hash解析出有用的数据。同样子窗口也可以向父窗口传递数据。</p>
+<p><strong>参考资料：</strong><br><a href="http://www.jianshu.com/p/438183ddcea8" target="_blank" rel="external">浏览器同源策略与ajax跨域方法汇总</a><br><a href="http://blog.damonare.cn/2016/12/01/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E6%95%B4%E7%90%86/" target="_blank" rel="external">前端跨域整理</a><br><a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="external">浏览器同源政策及其规避方法</a><br><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">跨域资源共享 CORS 详解</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" <i class="fa fa-tag"></i> js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/other/github上搭建个人主页.html" rel="prev" title="github上搭建个人主页">
+                github上搭建个人主页 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="javaScript高级程序设计/跨域.html"
+           data-title="跨域问题汇总" data-url="http://yoursite.com/javaScript高级程序设计/跨域.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/myIcon.jpeg"
+               alt="chenfengjuan" />
+          <p class="site-author-name" itemprop="name">chenfengjuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">这个城市风很大，孤独的人晚回家</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/iissnan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/iissnan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/iissnan" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/iissnan" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      DouBan
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/iissnan" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      ZhiHu
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理跨域"><span class="nav-number">2.</span> <span class="nav-text">代理跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS"><span class="nav-number">3.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">4.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过document-domain跨域"><span class="nav-number">5.</span> <span class="nav-text">通过document.domain跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过window-name跨域"><span class="nav-number">6.</span> <span class="nav-text">通过window.name跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过HTML5的postMessage方法跨域"><span class="nav-number">7.</span> <span class="nav-text">通过HTML5的postMessage方法跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过location-hash跨域"><span class="nav-number">8.</span> <span class="nav-text">通过location.hash跨域</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenfengjuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"notes-iissnan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
